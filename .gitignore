@@ -37,6 +37,11 @@
 !/xsettingsd/
 !/uwsm/
 
+# ---- ViegPhunt rice (his UI configs + helper scripts) ----
+!/colors/
+!/cava/
+!/viegphunt/
+
 # ---- generic junk that should never be tracked even inside the dirs above ----
 .cache/
 **/cache/

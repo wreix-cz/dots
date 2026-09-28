@@ -50,6 +50,18 @@ exec_once = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
 }
 
+-- ─────────────────────────────────────────────────────────────────────────────
+-- ViegPhunt rice startup overrides
+-- HyDE launches its own bar (`waybar.py --watch`) plus a notifier (dunst by
+-- default in variables.lua; swaync is what actually runs here). That rice uses
+-- a plain waybar with his config and swaync, so we point HyDE's startup there.
+-- `hyde-shell waybar --hide` still works: it sends SIGUSR1 to the waybar
+-- process, and plain waybar handles that signal too.
+-- ─────────────────────────────────────────────────────────────────────────────
+hyde.config.start.bar =
+    "waybar -c $HOME/.config/waybar/config -s $HOME/.config/waybar/style.css"
+hyde.config.start.notifications = "swaync"
+
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
@@ -86,6 +98,14 @@ local browser = "helium-browser"
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
+-- ViegPhunt rice: extra environment variables (his conf/environment.conf).
+-- Variables HyDE already sets (QT_QPA_PLATFORM, QT_QPA_PLATFORMTHEME, XDG_*,
+-- MOZ_ENABLE_WAYLAND, ELECTRON_OZONE_PLATFORM_HINT) are left as HyDE's.
+hl.env("GDK_BACKEND", "wayland,x11,*")
+hl.env("QT_STYLE_OVERRIDE", "kvantum")
+hl.env("SDL_VIDEODRIVER", "wayland")
+hl.env("OZONE_PLATFORM", "wayland")
+
 
 -----------------------
 ----- PERMISSIONS -----
@@ -113,18 +133,20 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 20,
+        -- ViegPhunt rice: tight gaps (his conf/appearance.conf)
+        gaps_in  = 2,
+        gaps_out = 5,
 
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
+            -- ViegPhunt rice: flat soft blue-grey border, no gradient
+            active_border   = "rgba(cdd6f4aa)",
             inactive_border = "rgba(595959aa)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = false,
+        resize_on_border = true,
 
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
@@ -133,7 +155,7 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 10,
+        rounding       = 2,
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
@@ -147,11 +169,13 @@ hl.config({
             color        = 0xee1a1a1a,
         },
 
+        -- ViegPhunt rice: heavier blur (his conf/appearance.conf)
         blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 1,
-            vibrancy  = 0.1696,
+            enabled           = true,
+            size              = 6,
+            passes            = 3,
+            new_optimizations = true,
+            ignore_opacity    = true,
         },
     },
 
@@ -170,23 +194,34 @@ hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1} 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
 
+-- ViegPhunt rice: his two custom curves (his conf/animation.conf)
+hl.curve("ease",     { type = "bezier", points = { {0.25, 0.1},  {0.25, 1.0}  } })
+hl.curve("overshot", { type = "bezier", points = { {0.13, 0.99}, {0.29, 1.05} } })
+
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
-hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+
+-- ViegPhunt rice animations (values from his conf/animation.conf)
+hl.animation({ leaf = "windows",     enabled = true, speed = 5, bezier = "overshot", style = "gnomed" })
+hl.animation({ leaf = "windowsOut",  enabled = true, speed = 5, bezier = "ease",     style = "slide bottom" })
+hl.animation({ leaf = "windowsMove", enabled = true, speed = 5, bezier = "overshot", style = "slide" })
+hl.animation({ leaf = "layers",      enabled = true, speed = 5, bezier = "ease",     style = "popin 87%" })  -- his file says "gnomed"; this Hyprland build rejects it for layers
+hl.animation({ leaf = "fade",        enabled = true, speed = 3, bezier = "ease" })
+hl.animation({ leaf = "border",      enabled = true, speed = 2, bezier = "ease" })
+hl.animation({ leaf = "workspaces",  enabled = true, speed = 5, bezier = "overshot", style = "slide" })
+
+-- Leaves his animation.conf does not define are commented out so they fall
+-- back to Hyprland defaults, the way they behave on his machine. Uncomment
+-- any of these if you prefer the old HyDE animations.
+-- hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
+-- hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
+-- hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
+-- hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
+-- hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
+-- hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
+-- hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
+-- hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
+-- hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+-- hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
@@ -233,8 +268,11 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        -- ViegPhunt rice values (his conf/misc.conf)
+        force_default_wallpaper    = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo      = true, -- If true disables the random hyprland logo / anime girl background.
+        disable_splash_rendering   = true,
+        initial_workspace_tracking = 1,
     },
 })
 
@@ -256,7 +294,10 @@ hl.config({
         sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-            natural_scroll = false,
+            -- ViegPhunt rice: natural (inverted) scrolling with a softer step.
+            -- Set natural_scroll back to false if this feels wrong.
+            natural_scroll = true,
+            scroll_factor  = 0.5,
         },
     },
 })
