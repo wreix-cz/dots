@@ -1,9 +1,24 @@
 $HOME/.config/hypr/themes/theme.conf|> $HOME/.config/hypr/themes/colors.conf
 #  // P̳r̳a̳s̳a̳n̳t̳h̳ R̳a̳n̳g̳a̳n̳
 
-$GTK_THEME=Catppuccin-Mocha
-$ICON_THEME = Tela-circle-dracula
+# ViegPhunt rice: his ~/.config/viegphunt/gtkthemes.sh values. `hyde-shell theme`
+# loads this file and re-applies these to gsettings/dconf, gtk-3.0/settings.ini,
+# xsettingsd, qt5ct/qt6ct, kdeglobals, ~/.gtkrc-2.0 and ~/.Xresources, so they
+# belong here as well as in ~/.local/share/hypr/lua/variables.lua.
+$GTK_THEME=adw-gtk3-dark
+$ICON_THEME = WhiteSur-dark
 $COLOR_SCHEME = prefer-dark
+$CURSOR_THEME = macOS
+$CURSOR_SIZE = 24
+$FONT = Segoe UI Variable Static Text
+$FONT_SIZE = 12
+$DOCUMENT_FONT = Segoe UI Variable Static Text
+$DOCUMENT_FONT_SIZE = 12
+$MONOSPACE_FONT = JetBrainsMono Nerd Font
+$MONOSPACE_FONT_SIZE = 12
+$NOTIFICATION_FONT = Segoe UI Variable Static Text
+$BAR_FONT = JetBrainsMono Nerd Font
+$MENU_FONT = JetBrainsMono Nerd Font
 
 # Optional: The varibles above will be set automatically when the theme is loaded
 # This exec commands will soon be deprecated

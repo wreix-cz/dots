@@ -23,7 +23,9 @@
 
 # ---- terminal & shell ----
 !/kitty/
+!/ghostty/
 !/zsh/
+!/nvim/
 
 # ---- system info / theming ----
 !/fastfetch/
@@ -41,6 +43,8 @@
 !/colors/
 !/cava/
 !/viegphunt/
+!/fontconfig/
+!/ohmyposh/
 
 # ---- generic junk that should never be tracked even inside the dirs above ----
 .cache/

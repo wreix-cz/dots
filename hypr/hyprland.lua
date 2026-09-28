@@ -48,6 +48,10 @@ hl.monitor({
 -- Add hyprpolkitagent to your exec-once table
 exec_once = {
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
+    -- ViegPhunt rice: his conf/autostart.conf applies the gtk/icons/cursor/fonts
+    -- set on login. HyDE's theme switch writes the same values (see
+    -- ~/.local/share/hypr/lua/variables.lua), this just makes them stick at boot.
+    "$HOME/.config/viegphunt/gtkthemes.sh",
 }
 
 -- ─────────────────────────────────────────────────────────────────────────────
