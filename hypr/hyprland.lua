@@ -86,12 +86,14 @@ local browser = "helium-browser"
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
 --
-hl.on("hyprland.start", function () 
-    hl.exec_cmd("waybar")
+-- NOTE: waybar is already started once via hyde.config.start.bar above.
+-- This file is also re-loaded by HyDE's hyde.lua (check_require("hyprland")),
+-- so a waybar launch here would stack a second/third bar on every boot.
+hl.on("hyprland.start", function ()
 --   hl.exec_cmd(terminal)
 --   hl.exec_cmd("nm-applet")
 --   hl.exec_cmd("waybar & hyprpaper & firefox")
-    end)
+end)
 
 
 -------------------------------
@@ -102,6 +104,15 @@ hl.on("hyprland.start", function ()
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+-- Keep ~/.local/bin on PATH even when the session is started outside uwsm
+-- (e.g. GDM's plain start-hyprland). HyDE's scripts (hyde-shell, wallpaper.sh,
+-- waybar.py) live there; without it every hyde-shell startup entry dies
+-- silently -- no wallpaper, no idle daemon, no clipboard, no theming.
+local _path = os.getenv("PATH") or "/usr/local/bin:/usr/bin"
+if not _path:find("/.local/bin", 1, true) then
+    hl.env("PATH", (os.getenv("HOME") or "") .. "/.local/bin:" .. _path)
+end
 
 -- ViegPhunt rice: extra environment variables (his conf/environment.conf).
 -- Variables HyDE already sets (QT_QPA_PLATFORM, QT_QPA_PLATFORMTHEME, XDG_*,
