@@ -1,0 +1,49 @@
+# ============================================================================
+# Dotfiles whitelist — everything is ignored by default, only the config
+# directories listed below are tracked. Add a line like  !/myapp/  to track
+# another config directory.
+# ============================================================================
+
+# ignore everything at the top level of ~/.config
+/*
+
+# the repo's own .gitignore
+!/.gitignore
+
+# ---- window manager / desktop ----
+!/hypr/
+!/hyde/
+!/waybar/
+!/wlogout/
+!/swaync/
+!/swaylock/
+!/rofi/
+!/dunst/
+!/pypr/
+
+# ---- terminal & shell ----
+!/kitty/
+!/zsh/
+
+# ---- system info / theming ----
+!/fastfetch/
+!/Kvantum/
+!/qt5ct/
+!/qt6ct/
+!/gtk-3.0/
+# gtk-4.0 is a symlink into ~/.local/share/themes (Wallbash) — tracked as a link
+!/gtk-4.0
+!/nwg-look/
+!/xsettingsd/
+!/uwsm/
+
+# ---- generic junk that should never be tracked even inside the dirs above ----
+.cache/
+**/cache/
+**/Cache/
+**/GPUCache/
+**/logs/
+**/tmp/
+__pycache__/
+*.log
+*.lock
