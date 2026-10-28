@@ -1,0 +1,3 @@
+* { bgcolor: #140e10; background-trans: #140e10; background-alt-trans: #140e10; }
+window { background-color: #140e10; }
+mainbox { background-color: #140e10; }

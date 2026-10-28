@@ -1,0 +1,21 @@
+/* nm-applet styling DEFINITIVO con Pywal */
+window, .background, .nm-applet-window, #nm-applet, #nm-applet-menu, .menu {
+    background-color: #140e10;
+    color: #e2d4d8;
+}
+menu, .menu, menuitem, .menuitem {
+    background-color: #140e10;
+    color: #e2d4d8;
+}
+menuitem:hover, .menuitem:hover, menuitem *:hover {
+    background-color: #CEA6A9;
+    color: #140e10;
+}
+/* Específico para el texto del menú */
+label {
+    color: inherit;
+}
+button {
+    background-color: #CEA6A9;
+    color: #140e10;
+}
