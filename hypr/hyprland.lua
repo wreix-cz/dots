@@ -435,7 +435,7 @@ hl.config({
 -- Input
 hl.config({
     input = {
-        kb_layout = "us,es",
+        kb_layout = "us,es,cz",
         kb_variant = "",
         kb_model = "",
         kb_options = "",
