@@ -1,41 +1,41 @@
 /*
  * Rofi color theme generado automáticamente por pywal
  * Template para sincronización automática
- * Generado: st 28. října 2026, 08:48:26 CET
+ * Generado: st 28. října 2026, 10:53:28 CET
  */
 
 * {
     /* Colores principales de pywal */
-    background:     #140e10;
-    background-alt: #140e10;
-    foreground:     #e2d4d8;
-    foreground-alt: #9e9497;
+    background:     #100f15;
+    background-alt: #100f15;
+    foreground:     #aabacf;
+    foreground-alt: #768290;
     
     /* Colores de acento */
-    selected:       #CEA6A9;
-    active:         #C47E81;
-    urgent:         #8E7C86;
+    selected:       #8978C8;
+    active:         #565586;
+    urgent:         #3A5286;
     
     /* Colores adicionales */
-    color0:         #140e10;
-    color1:         #8E7C86;
-    color2:         #C47E81;
-    color3:         #988791;
-    color4:         #AB9196;
-    color5:         #B39BA8;
-    color6:         #CEA6A9;
-    color7:         #e2d4d8;
-    color8:         #9e9497;
-    color9:         #8E7C86;
-    color10:        #C47E81;
-    color11:        #988791;
-    color12:        #AB9196;
-    color13:        #B39BA8;
-    color14:        #CEA6A9;
-    color15:        #e2d4d8;
+    color0:         #100f15;
+    color1:         #3A5286;
+    color2:         #565586;
+    color3:         #6F6798;
+    color4:         #6F699A;
+    color5:         #8678AB;
+    color6:         #8978C8;
+    color7:         #aabacf;
+    color8:         #768290;
+    color9:         #3A5286;
+    color10:        #565586;
+    color11:        #6F6798;
+    color12:        #6F699A;
+    color13:        #8678AB;
+    color14:        #8978C8;
+    color15:        #aabacf;
     
     /* Transparencias dinámicas */
-    background-trans:     #140e10CC;
-    background-alt-trans: #140e10AA;
-    selected-trans:       #CEA6A9DD;
+    background-trans:     #100f15CC;
+    background-alt-trans: #100f15AA;
+    selected-trans:       #8978C8DD;
 }
