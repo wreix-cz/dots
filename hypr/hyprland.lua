@@ -4,6 +4,7 @@
 local mainMod = "SUPER"
 local terminal = "kitty"
 local fileManager = "thunar"
+local browser = "helium-browser"
 
 -- Colors from pywal (inline instead of require)
 local color0  = "rgb(101012)"
@@ -329,9 +330,9 @@ aplicar_gpu_conf()
 -- General
 hl.config({
     general = {
-        gaps_in = 3,
+        gaps_in = 1,
         gaps_out = 10,
-        border_size = 2,
+        border_size = 1,
         col = {
             active_border   = color6,
             inactive_border = color8,
@@ -512,7 +513,7 @@ hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.local/bin/toggle-island"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("~/.local/bin/show-hotkeys"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.local/bin/settings-menu"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.local/bin/rofi-wifi-menu"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("~/.local/bin/rofi-bluetooth-menu"))
+hl.bind(mainMod .. " + CONTROL + B", hl.dsp.exec_cmd("~/.local/bin/rofi-bluetooth-menu"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.local/bin/open-clipboard"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("~/.local/bin/open-notifications"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
