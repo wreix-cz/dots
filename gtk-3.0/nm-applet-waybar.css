@@ -1,21 +1,21 @@
 /* nm-applet styling DEFINITIVO con Pywal */
 window, .background, .nm-applet-window, #nm-applet, #nm-applet-menu, .menu {
-    background-color: #010101;
-    color: #e6e7e6;
+    background-color: #100f15;
+    color: #aabacf;
 }
 menu, .menu, menuitem, .menuitem {
-    background-color: #010101;
-    color: #e6e7e6;
+    background-color: #100f15;
+    color: #aabacf;
 }
 menuitem:hover, .menuitem:hover, menuitem *:hover {
-    background-color: #CFCFCF;
-    color: #010101;
+    background-color: #8978C8;
+    color: #100f15;
 }
 /* Específico para el texto del menú */
 label {
     color: inherit;
 }
 button {
-    background-color: #CFCFCF;
-    color: #010101;
+    background-color: #8978C8;
+    color: #100f15;
 }
