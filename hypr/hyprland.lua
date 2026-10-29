@@ -5,6 +5,8 @@ local mainMod = "SUPER"
 local terminal = "kitty"
 local fileManager = "thunar"
 local browser = "helium-browser"
+local editor = "code"
+local music = "spotify"
 
 -- Colors from pywal (inline instead of require)
 local color0  = "rgb(101012)"
@@ -510,9 +512,7 @@ hl.layer_rule({
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd("~/.local/bin/rust-dock-toggle-all"))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("~/.local/bin/toggle-island"))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("~/.local/bin/show-hotkeys"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.local/bin/settings-menu"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("~/.local/bin/rofi-wifi-menu"))
 hl.bind(mainMod .. " + CONTROL + B", hl.dsp.exec_cmd("~/.local/bin/rofi-bluetooth-menu"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.local/bin/open-clipboard"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("~/.local/bin/open-notifications"))
@@ -542,6 +542,7 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/.local/bin/wallpaper-selec
 hl.bind(mainMod .. " + CONTROL + W", hl.dsp.exec_cmd("~/.local/bin/wallpaper-selector"))
 hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("~/.local/bin/wallpaper-changer-with-waybar-sync"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/.local/bin/wallpaper-change-adaptive"))
+
 
 -- Focus
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
